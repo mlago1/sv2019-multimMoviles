@@ -68,6 +68,14 @@ namespace Monogame01
             if ((enemyPosition.Y < 20) || (enemyPosition.Y > 550))
                 enemySpeed.Y = -enemySpeed.Y;
 
+            // Collisions checking
+            if (new Rectangle((int)shipPosition.X, (int)shipPosition.Y,
+             spaceship.Width, spaceship.Height).Intersects(
+                new Rectangle((int)enemyPosition.X, (int)enemyPosition.Y,
+                enemy.Width, enemy.Height)))
+                Exit();
+
+
             base.Update(gameTime);
         }
 
