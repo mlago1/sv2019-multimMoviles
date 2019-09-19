@@ -11,6 +11,7 @@ namespace Monogame01
 
         Texture2D background, spaceship;
         private Vector2 shipPosition;
+        float shipSpeed = 200;
 
         public Game1()
         {
@@ -44,9 +45,11 @@ namespace Monogame01
 
             var keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Left))
-                shipPosition.X -= 5;
+                shipPosition.X -= shipSpeed *
+                    (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (keyboardState.IsKeyDown(Keys.Right))
-                shipPosition.X += 5;
+                shipPosition.X += shipSpeed *
+                    (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             base.Update(gameTime);
         }
