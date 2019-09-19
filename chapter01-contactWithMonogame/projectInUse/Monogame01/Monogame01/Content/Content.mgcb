@@ -32,6 +32,12 @@
 /processorParam:TextureFormat=Compressed
 /build:File.spritefont;Font8bit.spritefont
 
+#begin fire.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:fire.mp3
+
 #begin fondo960.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -43,6 +49,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:fondo960.png
+
+#begin levelTick.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:levelTick.mp3
 
 #begin nave.png
 /importer:TextureImporter

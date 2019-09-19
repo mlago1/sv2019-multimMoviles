@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Monogame01
 {
@@ -15,6 +17,8 @@ namespace Monogame01
         private Vector2 enemyPosition;
         private Vector2 enemySpeed;
         private SpriteFont myFont;
+        private Song music;
+        private SoundEffect fireSound;
 
         public Game1()
         {
@@ -43,6 +47,11 @@ namespace Monogame01
             enemy = Content.Load<Texture2D>("enemigo1a");
             myFont = Content.Load<SpriteFont>("Font8bit");
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            fireSound = Content.Load<SoundEffect>("fire");
+            music = Content.Load<Song>("levelTick");
+
+            MediaPlayer.Play(music);
+            MediaPlayer.IsRepeating = true;
         }
 
         protected override void Update(GameTime gameTime)
@@ -76,6 +85,11 @@ namespace Monogame01
                 new Rectangle((int)enemyPosition.X, (int)enemyPosition.Y,
                 enemy.Width, enemy.Height)))
                 Exit();
+
+            // Fire (only sound so far)
+            if (keyboardState.IsKeyDown(Keys.Space))
+                fireSound.CreateInstance().Play();
+
 
             base.Update(gameTime);
         }
