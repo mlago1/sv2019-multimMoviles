@@ -9,9 +9,11 @@ namespace Monogame01
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D background, spaceship;
+        Texture2D background, spaceship, enemy;
         private Vector2 shipPosition;
         float shipSpeed = 200;
+        private Vector2 enemyPosition;
+        private Vector2 enemySpeed;
 
         public Game1()
         {
@@ -24,6 +26,8 @@ namespace Monogame01
             graphics.ApplyChanges();
 
             shipPosition = new Vector2(470, 500);
+            enemyPosition = new Vector2(300, 150);
+            enemySpeed = new Vector2(200, 100);
         }
 
         protected override void Initialize()
@@ -35,6 +39,7 @@ namespace Monogame01
         {
             background = Content.Load<Texture2D>("fondo960");
             spaceship = Content.Load<Texture2D>("nave");
+            enemy = Content.Load<Texture2D>("enemigo1a");
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
@@ -43,6 +48,7 @@ namespace Monogame01
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            // Spaceship movement, using keyboard
             var keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Left))
                 shipPosition.X -= shipSpeed *
@@ -50,6 +56,17 @@ namespace Monogame01
             if (keyboardState.IsKeyDown(Keys.Right))
                 shipPosition.X += shipSpeed *
                     (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            // Enemy movement, automatic
+            enemyPosition.X += enemySpeed.X *
+                (float)gameTime.ElapsedGameTime.TotalSeconds;
+            enemyPosition.Y += enemySpeed.Y *
+                (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if ((enemyPosition.X < 20) || (enemyPosition.X > 850))
+                enemySpeed.X = -enemySpeed.X;
+            if ((enemyPosition.Y < 20) || (enemyPosition.Y > 550))
+                enemySpeed.Y = -enemySpeed.Y;
 
             base.Update(gameTime);
         }
@@ -66,6 +83,11 @@ namespace Monogame01
                new Rectangle(
                    (int)shipPosition.X, (int)shipPosition.Y,
                    spaceship.Width, spaceship.Height),
+                   Color.White);
+            spriteBatch.Draw(enemy,
+               new Rectangle(
+                   (int)enemyPosition.X, (int)enemyPosition.Y,
+                   enemy.Width, enemy.Height),
                    Color.White);
             spriteBatch.End();
 
