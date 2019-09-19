@@ -10,6 +10,7 @@ namespace Monogame01
         SpriteBatch spriteBatch;
 
         Texture2D background, spaceship;
+        private Vector2 shipPosition;
 
         public Game1()
         {
@@ -20,6 +21,8 @@ namespace Monogame01
             graphics.PreferredBackBufferWidth = 960;
             graphics.PreferredBackBufferHeight = 600;
             graphics.ApplyChanges();
+
+            shipPosition = new Vector2(470, 500);
         }
 
         protected override void Initialize()
@@ -39,7 +42,11 @@ namespace Monogame01
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            var keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.Left))
+                shipPosition.X -= 5;
+            if (keyboardState.IsKeyDown(Keys.Right))
+                shipPosition.X += 5;
 
             base.Update(gameTime);
         }
@@ -49,12 +56,14 @@ namespace Monogame01
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(background, 
-                new Rectangle(0, 0, 960, 600), 
+            spriteBatch.Draw(background,
+                new Rectangle(0, 0, 960, 600),
                 Color.White);
             spriteBatch.Draw(spaceship,
-                new Rectangle(470, 500, spaceship.Width, spaceship.Height),
-                Color.White);
+               new Rectangle(
+                   (int)shipPosition.X, (int)shipPosition.Y,
+                   spaceship.Width, spaceship.Height),
+                   Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
