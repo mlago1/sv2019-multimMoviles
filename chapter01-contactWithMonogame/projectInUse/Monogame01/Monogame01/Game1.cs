@@ -14,6 +14,7 @@ namespace Monogame01
         float shipSpeed = 200;
         private Vector2 enemyPosition;
         private Vector2 enemySpeed;
+        private SpriteFont myFont;
 
         public Game1()
         {
@@ -40,6 +41,7 @@ namespace Monogame01
             background = Content.Load<Texture2D>("fondo960");
             spaceship = Content.Load<Texture2D>("nave");
             enemy = Content.Load<Texture2D>("enemigo1a");
+            myFont = Content.Load<SpriteFont>("Font8bit");
             spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
@@ -75,7 +77,6 @@ namespace Monogame01
                 enemy.Width, enemy.Height)))
                 Exit();
 
-
             base.Update(gameTime);
         }
 
@@ -87,6 +88,8 @@ namespace Monogame01
             spriteBatch.Draw(background,
                 new Rectangle(0, 0, 960, 600),
                 Color.White);
+            spriteBatch.DrawString(myFont, "Some text",
+                new Vector2(420, 10), Color.Cyan);
             spriteBatch.Draw(spaceship,
                new Rectangle(
                    (int)shipPosition.X, (int)shipPosition.Y,

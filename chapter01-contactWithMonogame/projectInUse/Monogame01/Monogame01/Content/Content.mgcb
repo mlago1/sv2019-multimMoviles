@@ -25,6 +25,13 @@
 /processorParam:TextureFormat=Color
 /build:enemigo1a.png
 
+#begin File.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:File.spritefont;Font8bit.spritefont
+
 #begin fondo960.png
 /importer:TextureImporter
 /processor:TextureProcessor
