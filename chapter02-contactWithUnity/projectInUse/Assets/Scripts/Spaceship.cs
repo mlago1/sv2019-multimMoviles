@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spaceship : MonoBehaviour
 {
+    [SerializeField] private float speed = 50;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +15,6 @@ public class Spaceship : MonoBehaviour
     void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        transform.Translate(horizontal, 0, 0);
+        transform.Translate(horizontal * speed * Time.deltaTime, 0, 0);
     }
 }
