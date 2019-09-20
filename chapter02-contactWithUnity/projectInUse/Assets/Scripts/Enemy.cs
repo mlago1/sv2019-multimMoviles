@@ -6,13 +6,8 @@ public class Enemy : MonoBehaviour
 {
     private float speedX = 3;
     private float speedY = 3;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (transform.position.x < -5 || transform.position.x > 5)

@@ -16,5 +16,10 @@ public class Spaceship : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         transform.Translate(horizontal * speed * Time.deltaTime, 0, 0);
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GetComponent<AudioSource>().Play();
+        }
     }
 }
