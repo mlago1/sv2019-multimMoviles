@@ -7,6 +7,7 @@ public class Spaceship : MonoBehaviour
 {
     [SerializeField] private float speed = 50;
     [SerializeField] private Text scoreboardText;
+    [SerializeField] private Transform shotPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,12 @@ public class Spaceship : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             GetComponent<AudioSource>().Play();
+            Instantiate(shotPrefab,
+                transform.position,
+                Quaternion.identity);
         }
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
