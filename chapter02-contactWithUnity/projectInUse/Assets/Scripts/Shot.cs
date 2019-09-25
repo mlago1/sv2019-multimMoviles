@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shot : MonoBehaviour
 {
     [SerializeField] float shotSpeed = 100;
+    [SerializeField] private Transform explosionPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,10 @@ public class Shot : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
+            Transform explosion = Instantiate(explosionPrefab,
+                transform.position,
+                Quaternion.identity);
+            Destroy(explosion.gameObject, 1);
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
