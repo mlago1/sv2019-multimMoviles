@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class Spaceship : MonoBehaviour
 {
     [SerializeField] private float speed = 50;
-    [SerializeField] private Text scoreboardText;
+    //[SerializeField] private Text scoreboardText;
     [SerializeField] private Transform shotPrefab;
+    private GameController game;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        game = FindObjectOfType<GameController>();
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class Spaceship : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        scoreboardText.text = "Hit!";
+        //scoreboardText.text = "Hit!";
+        game.PlayerHit();
     }
 }

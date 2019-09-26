@@ -6,10 +6,12 @@ public class Shot : MonoBehaviour
 {
     [SerializeField] float shotSpeed = 100;
     [SerializeField] private Transform explosionPrefab;
+    private GameController game;
 
     // Start is called before the first frame update
     void Start()
     {
+        game = FindObjectOfType<GameController>();
         gameObject.GetComponent<Rigidbody2D>().
             velocity = new Vector2(0, shotSpeed * Time.deltaTime);
     }
@@ -25,6 +27,7 @@ public class Shot : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
+            game.EnemyHit();
             Transform explosion = Instantiate(explosionPrefab,
                 transform.position,
                 Quaternion.identity);
