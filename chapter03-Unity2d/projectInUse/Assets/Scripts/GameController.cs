@@ -9,9 +9,11 @@ public class GameController : MonoBehaviour
     private int lives = 3;
     private int points = 0;
     [SerializeField] Text scoreboardText;
+    [SerializeField] Text gameoverText;
 
     private void Start()
     {
+        gameoverText.enabled = false;
         DisplayStatus();
     }
 
@@ -20,7 +22,7 @@ public class GameController : MonoBehaviour
         lives--;
         DisplayStatus();
         if (lives <= 0)
-            SceneManager.LoadScene(0);
+            StartCoroutine(FinishGame());
     }
 
     public void EnemyHit()
@@ -33,6 +35,15 @@ public class GameController : MonoBehaviour
     {
         scoreboardText.text = "Points " + points +
             "   Lives " + lives;
+    }
+
+    IEnumerator FinishGame()
+    {
+        gameoverText.enabled = true;
+        Time.timeScale = 0.01f;
+        yield return new WaitForSecondsRealtime(4);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
     }
 
 }
